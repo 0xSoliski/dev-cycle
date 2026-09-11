@@ -2,7 +2,7 @@
 
 This plugin packages selected skills from the following repositories.
 
-- `obra/superpowers` at commit `b36e0829c6d0140e93cfef2ca599b1b07d4a7797`
+- [obra/superpowers](https://github.com/obra/superpowers), by Jesse Vincent (`obra`), at commit [`b36e0829c6d0140e93cfef2ca599b1b07d4a7797`](https://github.com/obra/superpowers/commit/b36e0829c6d0140e93cfef2ca599b1b07d4a7797)
   - brainstorming
   - writing-plans
   - executing-plans
@@ -15,7 +15,7 @@ This plugin packages selected skills from the following repositories.
   - finishing-a-development-branch
   - subagent-driven-development
   - dispatching-parallel-agents
-- `addyosmani/agent-skills` at commit `6ca0cd7db39b41b1c37e26d335c507ee92382c6d`
+- [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills), by Addy Osmani, at commit [`6ca0cd7db39b41b1c37e26d335c507ee92382c6d`](https://github.com/addyosmani/agent-skills/commit/6ca0cd7db39b41b1c37e26d335c507ee92382c6d)
   - code-simplification
   - security-and-hardening
   - performance-optimization
