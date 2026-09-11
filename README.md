@@ -23,14 +23,15 @@ From `obra/superpowers`:
 10. `finishing-a-development-branch`
 11. `subagent-driven-development`
 12. `dispatching-parallel-agents`
+13. `writing-skills`
 
 From `addyosmani/agent-skills`:
 
-13. `code-simplification`
-14. `security-and-hardening`
-15. `performance-optimization`
-16. `browser-testing-with-devtools`
-17. `documentation-and-adrs`
+14. `code-simplification`
+15. `security-and-hardening`
+16. `performance-optimization`
+17. `browser-testing-with-devtools`
+18. `documentation-and-adrs`
 
 ## Install in Codex
 
@@ -47,6 +48,7 @@ A small number of references were adjusted so the selected upstream skills work 
 
 - Cross-skill references between bundled Superpowers skills use the `dev-cycle:` namespace.
 - `executing-plans` platform references are kept under that skill's `references/` directory to satisfy Codex plugin validation.
-- References to upstream skills that are not bundled remain upstream references.
+- Skill references are closed transitively: if a bundled skill requires another upstream skill, that skill is bundled too.
+- Supporting platform-reference files used by a skill are copied into that skill's own `references/` directory when needed for Codex validation.
 
 See [`plugins/dev-cycle/THIRD_PARTY_SOURCES.md`](plugins/dev-cycle/THIRD_PARTY_SOURCES.md) for details.

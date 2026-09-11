@@ -15,6 +15,7 @@ This plugin packages selected skills from the following repositories.
   - finishing-a-development-branch
   - subagent-driven-development
   - dispatching-parallel-agents
+  - writing-skills
 - [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills), by Addy Osmani, at commit [`6ca0cd7db39b41b1c37e26d335c507ee92382c6d`](https://github.com/addyosmani/agent-skills/commit/6ca0cd7db39b41b1c37e26d335c507ee92382c6d)
   - code-simplification
   - security-and-hardening
@@ -28,3 +29,5 @@ Packaging note: `executing-plans` keeps the upstream platform reference files in
 `references/` directory, with the corresponding relative link adjusted for Codex plugin validation.
 
 Packaging note: internal cross-skill namespace references for bundled skills are rewritten from `superpowers:` to `dev-cycle:` so they resolve when installed as this Codex plugin.
+
+Packaging note: `writing-skills` is included because `test-driven-development` references it. Its required skill references resolve to skills already bundled here, and its platform reference files are kept locally under `writing-skills/references/` for standalone validation.

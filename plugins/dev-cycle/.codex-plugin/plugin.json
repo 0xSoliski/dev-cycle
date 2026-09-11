@@ -1,6 +1,6 @@
 {
   "name": "dev-cycle",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Development-cycle skills from obra/superpowers and addyosmani/agent-skills",
   "author": {
     "name": "Solon Falas"
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "Dev Cycle",
     "shortDescription": "Planning, testing, debugging, review, security, performance, and delivery skills.",
-    "longDescription": "A development-cycle skill bundle combining 12 workflow skills from obra/superpowers with 5 focused engineering skills from addyosmani/agent-skills.",
+    "longDescription": "A development-cycle skill bundle combining 13 workflow skills from obra/superpowers with 5 focused engineering skills from addyosmani/agent-skills.",
     "developerName": "Jesse Vincent & Addy Osmani; packaged by Solon Falas",
     "category": "Productivity",
     "capabilities": [],
