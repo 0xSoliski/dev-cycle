@@ -30,4 +30,8 @@ Packaging note: `executing-plans` keeps the upstream platform reference files in
 
 Packaging note: internal cross-skill namespace references for bundled skills are rewritten from `superpowers:` to `dev-cycle:` so they resolve when installed as this Codex plugin.
 
-Packaging note: `writing-skills` is included because `test-driven-development` references it. Its required skill references resolve to skills already bundled here, and its platform reference files are kept locally under `writing-skills/references/` for standalone validation.
+Packaging note: `writing-skills` is included because `test-driven-development` references it. Its required skill references resolve to skills already bundled here. Duplicate Codex/Gemini platform reference copies were removed so Codex runtime guidance has a single canonical location under `executing-plans/references/`.
+
+Packaging note: Codex compatibility adaptations replace upstream operational paths and package branding with `dev-cycle` equivalents, map subagent operations to the live Codex tool schema, use Codex MCP setup for browser testing, and make Codex-first examples use `AGENTS.md`.
+
+Packaging note: stale development-only artifacts (`systematic-debugging/CREATION-LOG.md` and the Claude-specific `writing-skills/examples/CLAUDE_MD_TESTING.md`) are omitted from the packaged plugin. The large copied Anthropic authoring-guide snapshot in `writing-skills/anthropic-best-practices.md` is reduced to a concise platform-specific pointer plus portable principles. These packaging changes do not change the upstream attribution or preserved MIT license texts.

@@ -25,18 +25,19 @@ Use Chrome DevTools MCP to give your agent eyes into the browser. This bridges t
 
 ### Installation
 
-Add the following to your project's `.mcp.json` or Claude Code settings:
+First check whether a Chrome DevTools MCP server is already available in the current
+Codex task. If it is, use the advertised tools and do not modify configuration.
 
-```json
-{
-  "mcpServers": {
-    "chrome-devtools": {
-      "command": "npx",
-      "args": ["-y", "chrome-devtools-mcp@latest", "--isolated"]
-    }
-  }
-}
+For a local Codex installation that needs the server, configure it with the Codex MCP
+CLI:
+
+```bash
+codex mcp add chrome-devtools -- npx -y chrome-devtools-mcp@latest --isolated
 ```
+
+Verify the registration with `codex mcp list`, then start a new Codex task if the
+current task does not pick up newly configured MCP tools. Do not create a Claude Code
+`.mcp.json` file for Codex.
 
 `-y` skips the npx install confirmation. By default the server launches Chrome with its own dedicated profile (under `~/.cache/chrome-devtools-mcp/`), separate from your personal browser; `--isolated` goes one step further and uses a temporary profile that is wiped when the browser closes. This is the right setup for most testing.
 

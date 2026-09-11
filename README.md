@@ -44,11 +44,16 @@ Start a new Codex task after installation so the new skills are loaded into the 
 
 ## Packaging adaptations
 
-A small number of references were adjusted so the selected upstream skills work as a standalone Codex plugin:
+A small number of references and runtime assumptions were adjusted so the selected upstream skills work as a standalone Codex plugin:
 
 - Cross-skill references between bundled Superpowers skills use the `dev-cycle:` namespace.
 - `executing-plans` platform references are kept under that skill's `references/` directory to satisfy Codex plugin validation.
 - Skill references are closed transitively: if a bundled skill requires another upstream skill, that skill is bundled too.
-- Supporting platform-reference files used by a skill are copied into that skill's own `references/` directory when needed for Codex validation.
+- Operational scratch/workflow paths use `.dev-cycle/` and `docs/dev-cycle/` instead of upstream package-specific paths.
+- Codex-facing subagent guidance uses the live runtime tool schema rather than hard-coded pseudo-syntax, model names, or timeout assumptions.
+- `browser-testing-with-devtools` uses Codex MCP setup commands rather than Claude Code configuration.
+- Codex-first examples use `AGENTS.md`; Claude-specific examples and stale historical artifacts that are not required at runtime were removed.
+- Duplicate platform reference files under `writing-skills` were removed; Codex runtime mapping is centralized under `executing-plans/references/codex-tools.md`.
+- The large copied Anthropic skill-authoring documentation snapshot was replaced with a concise pointer and portable principles; upstream provenance and license attribution remain preserved.
 
 See [`plugins/dev-cycle/THIRD_PARTY_SOURCES.md`](plugins/dev-cycle/THIRD_PARTY_SOURCES.md) for details.

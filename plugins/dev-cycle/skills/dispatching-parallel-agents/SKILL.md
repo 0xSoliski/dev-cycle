@@ -65,16 +65,15 @@ Each agent gets:
 
 ### 3. Dispatch in Parallel
 
-Issue all three subagent dispatches in the same response — they run in parallel:
+Issue three independent spawn calls in the same tool round when the Codex runtime supports parallel multi-agent dispatch. Use the actual spawn tool and its live schema:
 
 ```text
-Subagent (general-purpose): "Fix agent-tool-abort.test.ts failures"
-Subagent (general-purpose): "Fix batch-completion-behavior.test.ts failures"
-Subagent (general-purpose): "Fix tool-approval-race-conditions.test.ts failures"
-# All three run concurrently.
+Dispatch A prompt: Fix agent-tool-abort.test.ts failures
+Dispatch B prompt: Fix batch-completion-behavior.test.ts failures
+Dispatch C prompt: Fix tool-approval-race-conditions.test.ts failures
 ```
 
-Multiple dispatch calls in one response = parallel execution. One per response = sequential.
+Do not type these labels as commands. They describe the three prompts passed to real spawn calls. If the current runtime cannot batch calls, dispatch them through the supported parallel mechanism rather than inventing tool syntax.
 
 ### 4. Review and Integrate
 

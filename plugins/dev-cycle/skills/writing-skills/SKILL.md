@@ -9,7 +9,7 @@ description: Use when creating new skills, editing existing skills, or verifying
 
 **Writing skills IS Test-Driven Development applied to process documentation.**
 
-**Personal skills live in your runtime's skills directory** (`~/.claude/skills/` on Claude Code) — see [codex-tools.md](references/codex-tools.md) or [gemini-tools.md](references/gemini-tools.md) for the path on those runtimes. Codex, Copilot CLI, and Gemini CLI all also recognize `~/.agents/skills/` as a cross-runtime alias.
+**Skill discovery is runtime-specific.** On Codex, use the skill catalog exposed in the task/plugin context rather than assuming a filesystem path. Do not reuse Claude-specific paths such as `~/.claude/skills/` unless you are actually running Claude Code.
 
 You write test cases (pressure scenarios with subagents), watch them fail (baseline behavior), write the skill (documentation), watch tests pass (agents comply), and refactor (close loopholes).
 
@@ -17,7 +17,7 @@ You write test cases (pressure scenarios with subagents), watch them fail (basel
 
 **REQUIRED BACKGROUND:** You MUST understand dev-cycle:test-driven-development before using this skill. That skill defines the fundamental RED-GREEN-REFACTOR cycle. This skill adapts TDD to documentation.
 
-**Official guidance:** For Anthropic's official skill authoring best practices, see anthropic-best-practices.md. This document provides additional patterns and guidelines that complement the TDD-focused approach in this skill.
+**Upstream reference:** [anthropic-best-practices.md](anthropic-best-practices.md) summarizes the Claude-specific source material bundled upstream. Treat its design principles as background; Codex runtime behavior and tool schemas remain authoritative.
 
 ## What is a Skill?
 

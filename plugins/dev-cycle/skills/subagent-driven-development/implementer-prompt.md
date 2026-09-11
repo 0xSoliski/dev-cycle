@@ -2,12 +2,11 @@
 
 Use this template when dispatching an implementer subagent.
 
-```
-Subagent (general-purpose):
-  description: "Implement Task N: [task name]"
-  model: [MODEL — REQUIRED: choose per SKILL.md Model Selection; an omitted
-         model silently inherits the session's most expensive one]
-  prompt: |
+Dispatch this through the subagent capability exposed by the current runtime.
+On Codex, call the actual multi-agent spawn tool shown in the live tool list; do not
+write or emulate pseudo command syntax. Render every placeholder before dispatch.
+
+```text
     You are implementing Task N: [task name]
 
     ## Task Description
@@ -86,8 +85,7 @@ Subagent (general-purpose):
 
     **How to escalate:** Report back with status BLOCKED or NEEDS_CONTEXT. Describe
     specifically what you're stuck on, what you've tried, and what kind of help you need.
-    The controller can provide more context, re-dispatch with a more capable model,
-    or break the task into smaller pieces.
+    The controller can provide more context, use an allowed capability override when the runtime permits it, or break the task into smaller pieces.
 
     ## Before Reporting Back: Self-Review
 

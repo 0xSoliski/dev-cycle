@@ -4,10 +4,11 @@ Use this template when dispatching a code reviewer subagent.
 
 **Purpose:** Review completed work against requirements and code quality standards before it cascades into more work.
 
-```
-Subagent (general-purpose):
-  description: "Review code changes"
-  prompt: |
+Dispatch this through the subagent capability exposed by the current runtime.
+On Codex, call the actual multi-agent spawn tool shown in the live tool list; do not
+write or emulate pseudo command syntax. Render every placeholder before dispatch.
+
+```text
     You are a Senior Code Reviewer with expertise in software architecture,
     design patterns, and best practices. Your job is to review completed work
     against its plan or requirements and identify issues before they cascade.

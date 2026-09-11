@@ -6,10 +6,11 @@ Use this template when dispatching a plan document reviewer subagent.
 
 **Dispatch after:** The complete plan is written.
 
-```
-Subagent (general-purpose):
-  description: "Review plan document"
-  prompt: |
+Dispatch this through the subagent capability exposed by the current runtime.
+On Codex, call the actual multi-agent spawn tool shown in the live tool list; do not
+write or emulate pseudo command syntax. Render every placeholder before dispatch.
+
+```text
     You are a plan document reviewer. Verify this plan is complete and ready for implementation.
 
     **Plan to review:** [PLAN_FILE_PATH]
