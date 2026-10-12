@@ -1,0 +1,45 @@
+name: Release plugin bundles
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify tag matches plugin version
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          version = json.loads(Path('plugins/dev-cycle/.codex-plugin/plugin.json').read_text())['version']
+          assert os.environ['GITHUB_REF_NAME'] == f'v{version}', 'Tag must match plugin version'
+          PY
+      - name: Validate release packaging
+        run: node --test tests/plugin-packaging.test.cjs tests/release-bundles.test.cjs
+      - name: Build release bundles
+        run: python3 scripts/build-release.py
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          cd "dist/$version"
+          sha256sum -c SHA256SUMS
+          gh release create "$GITHUB_REF_NAME" \
+            --repo "$GITHUB_REPOSITORY" \
+            --verify-tag \
+            --title "Dev Cycle $version — Codex and Claude Code" \
+            --notes-file RELEASE_NOTES.md \
+            "dev-cycle-codex-$version.zip" \
+            "dev-cycle-claude-code-$version.zip" \
+            SHA256SUMS RELEASE_NOTES.md

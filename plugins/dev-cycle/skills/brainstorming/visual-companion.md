@@ -35,7 +35,7 @@ The server watches a directory for HTML files and serves the newest one to the b
 ```bash
 # Start AFTER the user approves the companion. --open auto-opens their browser on
 # the first screen; --project-dir persists mockups and enables same-port restart.
-scripts/start-server.sh --project-dir /path/to/project --open
+bash scripts/start-server.sh --project-dir /path/to/project --open
 
 # Returns: {"type":"server-started","port":52341,
 #           "url":"http://localhost:52341/?key=ab12…",
@@ -57,20 +57,21 @@ without repeating it.
 
 **Note:** Pass the project root as `--project-dir` so mockups persist in `.dev-cycle/brainstorm/` and survive server restarts. Without it, files go to `/tmp` and get cleaned up. Remind the user to add `.dev-cycle/` to `.gitignore` if it's not already there.
 
-**Launching from Codex:**
+**Launching from Claude Code or Codex:**
 
 ```bash
-scripts/start-server.sh --project-dir /path/to/project --open
+bash scripts/start-server.sh --project-dir /path/to/project --open
 ```
 
-The launcher detects the Codex environment and uses foreground mode when required by
-the host. If your runtime provides a background-process mechanism, follow that runtime's
-live tool contract instead of copying commands from another agent platform.
+The launcher detects the Codex environment and uses foreground mode there by default.
+On Claude Code it normally starts in the background; if the host reaps detached
+processes, use `--foreground` with the runtime's persistent/background execution
+tool. Follow the active tool contract instead of copying calls from another platform.
 
 If the URL is unreachable from your browser (common in remote/containerized setups), bind a non-loopback host:
 
 ```bash
-scripts/start-server.sh \
+bash scripts/start-server.sh \
   --project-dir /path/to/project \
   --host 0.0.0.0 \
   --url-host localhost
@@ -263,7 +264,7 @@ If `$STATE_DIR/events` doesn't exist, the user didn't interact with the browser 
 ## Cleaning Up
 
 ```bash
-scripts/stop-server.sh $SESSION_DIR
+bash scripts/stop-server.sh $SESSION_DIR
 ```
 
 If the session used `--project-dir`, mockup files persist in `.dev-cycle/brainstorm/` for later reference. Only `/tmp` sessions get deleted on stop.

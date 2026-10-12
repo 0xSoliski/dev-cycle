@@ -8,8 +8,10 @@ new breakage. It is not a fresh review — the full review already happened.
 that the fix itself broke nothing.
 
 Dispatch this through the subagent capability exposed by the current runtime.
-On Codex, call the actual multi-agent spawn tool shown in the live tool list; do not
-write or emulate pseudo command syntax. Render every placeholder before dispatch.
+On Codex, use the multi-agent spawn tool shown in the live tool list. On Claude
+Code, use the Agent tool (Task in older releases) with an available agent type such
+as `general-purpose`. Follow the live schema rather than emulating command syntax.
+Render every placeholder before dispatch.
 
 ```text
     You are re-reviewing one task's fix round. A previous review produced
@@ -106,7 +108,7 @@ write or emulate pseudo command syntax. Render every placeholder before dispatch
 - `[REPORT_FILE]` — the implementer's report file (fix reports appended)
 - `[FIX_BASE_SHA]` — the head the previous review saw
 - `[HEAD_SHA]` — current commit
-- `[DIFF_FILE]` — the path `scripts/review-package PLAN_FILE FIX_BASE HEAD` printed
+- `[DIFF_FILE]` — the path `bash scripts/review-package PLAN_FILE FIX_BASE HEAD` printed
 
 **Re-reviewer returns:** per-finding verdicts (ADDRESSED / NOT ADDRESSED),
 new breakage in the fix diff, out-of-scope observations, and a round verdict.

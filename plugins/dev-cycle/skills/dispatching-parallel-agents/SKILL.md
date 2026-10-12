@@ -65,7 +65,7 @@ Each agent gets:
 
 ### 3. Dispatch in Parallel
 
-Issue three independent spawn calls in the same tool round when the Codex runtime supports parallel multi-agent dispatch. Use the actual spawn tool and its live schema:
+Dispatch three independent agents when the current runtime and session policies support parallel work. On Codex, use the available spawn tool; on Claude Code, use the Agent tool (Task in older releases). Follow the live schema:
 
 ```text
 Dispatch A prompt: Fix agent-tool-abort.test.ts failures

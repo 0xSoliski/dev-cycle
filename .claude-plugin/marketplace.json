@@ -1,0 +1,15 @@
+{
+  "name": "dev-cycle",
+  "description": "Shared software-development skills for Claude Code and Codex",
+  "owner": {
+    "name": "Solon Falas"
+  },
+  "plugins": [
+    {
+      "name": "dev-cycle",
+      "source": "./plugins/dev-cycle",
+      "description": "Development-cycle skills from obra/superpowers and addyosmani/agent-skills",
+      "category": "development"
+    }
+  ]
+}

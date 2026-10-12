@@ -8,8 +8,10 @@ code quality.
 more, nothing less) and is well-built (clean, tested, maintainable)
 
 Dispatch this through the subagent capability exposed by the current runtime.
-On Codex, call the actual multi-agent spawn tool shown in the live tool list; do not
-write or emulate pseudo command syntax. Render every placeholder before dispatch.
+On Codex, use the multi-agent spawn tool shown in the live tool list. On Claude
+Code, use the Agent tool (Task in older releases) with an available agent type such
+as `general-purpose`. Follow the live schema rather than emulating command syntax.
+Render every placeholder before dispatch.
 
 ```text
     You are reviewing one task's implementation: first whether it matches its
@@ -187,7 +189,7 @@ write or emulate pseudo command syntax. Render every placeholder before dispatch
 ```
 
 **Placeholders:**
-- `[BRIEF_FILE]` — REQUIRED: the task brief file (`scripts/task-brief PLAN N`
+- `[BRIEF_FILE]` — REQUIRED: the task brief file (`bash scripts/task-brief PLAN N`
   prints the path; same file the implementer worked from)
 - `[GLOBAL_CONSTRAINTS]` — the binding requirements copied verbatim from
   the plan's Global Constraints section or the spec: exact values, formats,
@@ -198,7 +200,7 @@ write or emulate pseudo command syntax. Render every placeholder before dispatch
 - `[BASE_SHA]` — commit before this task
 - `[HEAD_SHA]` — current commit
 - `[DIFF_FILE]` — REQUIRED: the path the controller wrote the review
-  package to (`scripts/review-package PLAN_FILE BASE HEAD` prints the unique
+  package to (`bash scripts/review-package PLAN_FILE BASE HEAD` prints the unique
   path it wrote; the package never enters the controller's context)
 
 **Reviewer returns:** Spec Compliance verdict (✅/❌/⚠️), Strengths, Issues

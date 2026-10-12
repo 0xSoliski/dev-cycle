@@ -26,7 +26,21 @@ Use Chrome DevTools MCP to give your agent eyes into the browser. This bridges t
 ### Installation
 
 First check whether a Chrome DevTools MCP server is already available in the current
-Codex task. If it is, use the advertised tools and do not modify configuration.
+session. If it is, use the advertised tools and do not modify configuration.
+
+Choose the setup command for the client you are actually running.
+
+**Claude Code:**
+
+```bash
+claude mcp add --scope user chrome-devtools -- npx -y chrome-devtools-mcp@latest --isolated
+```
+
+Verify with `claude mcp list`, then restart Claude Code if the tools are not yet
+available. Use `--scope project` instead only when the project should share this
+registration through its `.mcp.json` file.
+
+**Codex:**
 
 For a local Codex installation that needs the server, configure it with the Codex MCP
 CLI:

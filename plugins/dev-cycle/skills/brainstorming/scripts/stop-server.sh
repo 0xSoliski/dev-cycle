@@ -62,8 +62,24 @@ command_has_server_id() {
 
 # Confirm a PID has this session's per-start instance id, not just a familiar
 # process name. Ambiguous or legacy metadata fails closed as stale_pid.
-is_brainstorm_server() {
+process_is_running() {
+  [[ "$1" =~ ^[1-9][0-9]*$ ]] || return 1
   kill -0 "$1" 2>/dev/null || return 1
+  local process_state
+  if [[ -r "/proc/$1/stat" ]] && IFS= read -r process_state < "/proc/$1/stat"; then
+    # The parenthesized command can contain spaces or ')'. State follows its
+    # final ')'. A zombie has exited even when container PID 1 has not reaped it.
+    process_state="${process_state##*) }"
+    process_state="${process_state%% *}"
+  else
+    process_state="$(ps -p "$1" -o stat= 2>/dev/null || true)"
+    process_state="${process_state//[[:space:]]/}"
+  fi
+  [[ "$process_state" != Z* ]]
+}
+
+is_brainstorm_server() {
+  process_is_running "$1" || return 1
   local expected_id
   expected_id="$(read_expected_server_id)" || return 1
   command_has_server_id "$1" "$expected_id" || return 1
@@ -87,21 +103,21 @@ if [[ -f "$PID_FILE" ]]; then
 
   # Wait for graceful shutdown (up to ~2s)
   for _ in {1..20}; do
-    if ! kill -0 "$pid" 2>/dev/null; then
+    if ! is_brainstorm_server "$pid"; then
       break
     fi
     sleep 0.1
   done
 
   # If still running, escalate to SIGKILL
-  if kill -0 "$pid" 2>/dev/null; then
+  if is_brainstorm_server "$pid"; then
     kill -9 "$pid" 2>/dev/null || true
 
     # Give SIGKILL a moment to take effect
     sleep 0.1
   fi
 
-  if kill -0 "$pid" 2>/dev/null; then
+  if is_brainstorm_server "$pid"; then
     echo '{"status": "failed", "error": "process still running"}'
     exit 1
   fi

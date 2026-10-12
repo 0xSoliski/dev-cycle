@@ -3,8 +3,10 @@
 Use this template when dispatching an implementer subagent.
 
 Dispatch this through the subagent capability exposed by the current runtime.
-On Codex, call the actual multi-agent spawn tool shown in the live tool list; do not
-write or emulate pseudo command syntax. Render every placeholder before dispatch.
+On Codex, use the multi-agent spawn tool shown in the live tool list. On Claude
+Code, use the Agent tool (Task in older releases) with an available agent type such
+as `general-purpose`. Follow the live schema rather than emulating command syntax.
+Render every placeholder before dispatch.
 
 ```text
     You are implementing Task N: [task name]

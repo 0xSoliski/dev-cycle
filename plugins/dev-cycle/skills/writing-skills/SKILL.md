@@ -11,13 +11,18 @@ description: Use when creating new skills, editing existing skills, or verifying
 
 **Skill discovery is runtime-specific.** On Codex, use the skill catalog exposed in the task/plugin context rather than assuming a filesystem path. Do not reuse Claude-specific paths such as `~/.claude/skills/` unless you are actually running Claude Code.
 
+On Claude Code, invoke installed plugin skills through the Skill tool using
+`dev-cycle:<skill-name>`, or `/dev-cycle:<skill-name>` interactively. Resolve bundled
+files relative to the loaded skill directory, not a guessed global skills path.
+See the [Claude Code runtime mapping](../executing-plans/references/claude-code-tools.md).
+
 You write test cases (pressure scenarios with subagents), watch them fail (baseline behavior), write the skill (documentation), watch tests pass (agents comply), and refactor (close loopholes).
 
 **Core principle:** If you didn't watch an agent fail without the skill, you don't know if the skill teaches the right thing.
 
 **REQUIRED BACKGROUND:** You MUST understand dev-cycle:test-driven-development before using this skill. That skill defines the fundamental RED-GREEN-REFACTOR cycle. This skill adapts TDD to documentation.
 
-**Upstream reference:** [anthropic-best-practices.md](anthropic-best-practices.md) summarizes the Claude-specific source material bundled upstream. Treat its design principles as background; Codex runtime behavior and tool schemas remain authoritative.
+**Upstream reference:** [anthropic-best-practices.md](anthropic-best-practices.md) summarizes the Claude-specific source material bundled upstream. Treat its design principles as background; the active runtime's behavior and tool schemas remain authoritative.
 
 ## What is a Skill?
 
@@ -317,8 +322,8 @@ See `graphviz-conventions.dot` in this directory for graphviz style rules.
 
 **Visualizing for your human partner:** Use `render-graphs.js` in this directory to render a skill's flowcharts to SVG:
 ```bash
-./render-graphs.js ../some-skill           # Each diagram separately
-./render-graphs.js ../some-skill --combine # All diagrams in one SVG
+node ./render-graphs.js ../some-skill           # Each diagram separately
+node ./render-graphs.js ../some-skill --combine # All diagrams in one SVG
 ```
 
 ## Code Examples
@@ -370,6 +375,8 @@ pptx/
   scripts/       # Executable tools
 ```
 When: Reference material too large for inline
+
+Invoke bundled scripts through their interpreter in the prose (`bash scripts/tool.sh`, `node scripts/tool.js`), never by bare path: some harness plugin packagers strip executable bits, and a bare `scripts/tool.sh` fails there with `Permission denied`.
 
 ## The Iron Law (Same as TDD)
 

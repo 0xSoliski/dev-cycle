@@ -46,7 +46,7 @@ ASK BEFORE EVERY CHANGE:
 Simplification means making code more consistent with the codebase, not imposing external preferences. Before simplifying:
 
 ```
-1. Read AGENTS.md / project conventions
+1. Read project conventions (`AGENTS.md` on Codex, `CLAUDE.md` on Claude Code)
 2. Study how neighboring code handles similar patterns
 3. Match the project's style for:
    - Import ordering and module system

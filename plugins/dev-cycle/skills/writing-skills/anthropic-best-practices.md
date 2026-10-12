@@ -20,5 +20,6 @@ The portable principles relevant to this plugin are:
   details; inspect the active environment instead of hard-coding another agent's
   conventions.
 
-Codex-specific behavior in this plugin is documented by the plugin's own skills and
-`executing-plans/references/codex-tools.md`.
+Runtime-specific behavior is documented by the plugin's own skills and the mappings
+under `executing-plans/references/`: `codex-tools.md` for Codex and
+`claude-code-tools.md` for Claude Code.
