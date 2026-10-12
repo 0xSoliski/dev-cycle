@@ -1,6 +1,12 @@
 name: Release plugin bundles
 
 on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing release tag to publish
+        required: true
+        default: v0.5.0
   push:
     tags:
       - 'v*'
@@ -11,8 +17,12 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref_name }}
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
@@ -22,7 +32,7 @@ jobs:
           import json, os
           from pathlib import Path
           version = json.loads(Path('plugins/dev-cycle/.codex-plugin/plugin.json').read_text())['version']
-          assert os.environ['GITHUB_REF_NAME'] == f'v{version}', 'Tag must match plugin version'
+          assert os.environ['RELEASE_TAG'] == f'v{version}', 'Tag must match plugin version'
           PY
       - name: Validate release packaging
         run: node --test tests/plugin-packaging.test.cjs tests/release-bundles.test.cjs
@@ -32,10 +42,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          version="${GITHUB_REF_NAME#v}"
+          version="${RELEASE_TAG#v}"
           cd "dist/$version"
           sha256sum -c SHA256SUMS
-          gh release create "$GITHUB_REF_NAME" \
+          gh release create "$RELEASE_TAG" \
             --repo "$GITHUB_REPOSITORY" \
             --verify-tag \
             --title "Dev Cycle $version — Codex and Claude Code" \
